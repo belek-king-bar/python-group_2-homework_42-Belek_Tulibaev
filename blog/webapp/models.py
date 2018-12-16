@@ -11,7 +11,7 @@ class Article(models.Model):
                                          related_name='rated_by', verbose_name='Оценки пользователя')
 
     def __str__(self):
-        return "%s. %s - %s" % (self.pk, self.title, self.author.name)
+        return "%s - %s" % (self.title, self.author.name)
 
 class User(models.Model):
     name = models.CharField(max_length=50, verbose_name='Имя пользователя')
@@ -31,7 +31,7 @@ class Comment(models.Model):
     text = models.TextField(max_length=2000, verbose_name='Комментарий')
 
     def __str__(self):
-        return "%s. %s (%s) - %s" % (self.pk, self.article.title, self.text, self.user.name)
+        return "%s (%s) - %s" % (self.article.title, self.text, self.user.name)
 
 class Rating(models.Model):
     RATING_TERRIBLY = 'terribly'
@@ -54,4 +54,4 @@ class Rating(models.Model):
     rating = models.CharField(max_length=20, choices=RATING_CHOICES, default=RATING_NORM, verbose_name="оценка")
 
     def __str__(self):
-        return "%s. %s: %s - %s" % (self.pk, self.article.title, self.rating, self.user.name)
+        return "%s: %s - %s" % (self.article.title, self.rating, self.user.name)

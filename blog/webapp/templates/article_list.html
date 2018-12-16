@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Статьи{% endblock %}
+{% block menu %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_list' %}">Список статьей</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Список пользователей</a>
+        </li>
+{% endblock %}
+{% block content %}
+    {% for article in article_list %}
+        <h4><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h4>
+        <h6>{{ article.author.name }}</h6>
+    {% endfor %}
+{% endblock %}

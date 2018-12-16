@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Пользователь{% endblock %}
+{% block menu %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_list' %}">Список статьей</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Список пользователей</a>
+        </li>
+{% endblock %}
+{% block content %}
+    {% for user in user_list %}
+        <h3>{{ user.name }}</h3>
+            {% for article in user.article.all %}
+                <h5>{{ article.title }}</h5>
+            {% endfor %}
+                {% for favorites in user.favorites.all %}
+                    <h6>{{ user.favorites }}</h6>
+                {% endfor %}
+    {% endfor %}
+{% endblock %}
