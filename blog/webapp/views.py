@@ -18,6 +18,4 @@ class ArticleDetailView(DetailView):
 
 class UserDetailView(DetailView):
     model = User
-    template_name = 'user_template.html'
-
-
+    template_name = 'user_detail.html'

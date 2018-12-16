@@ -4,7 +4,7 @@ from django.db import models
 class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
     text = models.TextField(max_length=2000, verbose_name='Текст')
-    author = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Автор')
+    author = models.ForeignKey('User', on_delete=models.CASCADE, related_name='articles', verbose_name='Автор')
     commented_by = models.ManyToManyField('User', through='Comment', through_fields=('article', 'user'),
                                       related_name='commented_by', verbose_name='Комментарий пользователя')
     rated_by = models.ManyToManyField('User', through='Rating', through_fields=('article', 'user'),
@@ -34,11 +34,11 @@ class Comment(models.Model):
         return "%s (%s) - %s" % (self.article.title, self.text, self.user.name)
 
 class Rating(models.Model):
-    RATING_TERRIBLY = 'terribly'
-    RATING_POORLY = 'poorly'
-    RATING_NORM = 'norm'
-    RATING_GOOD = 'good'
-    RATING_FINE = 'fine'
+    RATING_TERRIBLY = 'Ужасно'
+    RATING_POORLY = 'Плохо'
+    RATING_NORM = 'Нормально'
+    RATING_GOOD = 'Хорошо'
+    RATING_FINE = 'Отлично'
 
     RATING_CHOICES = (
         (RATING_TERRIBLY, 'Ужасно'),
