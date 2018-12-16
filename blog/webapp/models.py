@@ -27,11 +27,12 @@ class User(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='comment')
-    article = models.ForeignKey(Article, on_delete=models.PROTECT, related_name='comment')
+    article = models.ForeignKey(Article, on_delete=models.PROTECT, null=True, blank=True, related_name='comment')
     text = models.TextField(max_length=2000, verbose_name='Комментарий')
+    comment_to_comment = models.ForeignKey('Comment', on_delete=models.PROTECT, null=True, blank=True, related_name='comment')
 
     def __str__(self):
-        return "%s (%s) - %s" % (self.article.title, self.text, self.user.name)
+        return "%s - %s" % (self.text, self.user.name)
 
 class Rating(models.Model):
     RATING_TERRIBLY = 'Ужасно'

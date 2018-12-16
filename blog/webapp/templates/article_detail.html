@@ -9,16 +9,26 @@
         </li>
 {% endblock %}
 {% block content %}
-        <h1>{{ article.title }}</h1>
-        <h4>Описание:</h4>
-        <span>{{ article.text }}</span>
-        <h3>Автор: {{ article.author.name }}</h3>
-        <h5>Комментарии:</h5>
+    <div>
+        <h1 class="text-center mt-4 mb-3">{{ article.title }}</h1>
+            <p class="mb-3">{{ article.text }}</p>
+        <h4 class="text-right mb-3">Автор: {{ article.author.name }}</h4>
+    </div>
+    <div class="mb-5">
+        <h4>Комментарии:</h4>
             {% for comment in article.comment.all %}
-                <h5><i>{{ comment.user.name }}: </i></h5> <p>{{ comment.text }}</p>
+                <div class="ml-5">
+                <h5><i>{{ comment.user.name }}:</i></h5><p>{{ comment.text }}</p>
+                {% for comment in comment.comment.all %}
+                    <p class="ml-5"><i>{{ comment.user.name }}: </i>{{ comment.text }}</p>
+                {% endfor %}
+                </div>
             {% endfor %}
+    </div>
+    <div>
         <h5>Оценки:</h5>
             {% for rating in article.rating.all %}
-                <p>{{ rating.rating }} - <i>{{ rating.user.name }}</i></p>
+                <p class="ml-5"><i>{{ rating.user.name }}:</i> {{ rating.rating }}</p>
             {% endfor %}
+    </div>
 {% endblock %}

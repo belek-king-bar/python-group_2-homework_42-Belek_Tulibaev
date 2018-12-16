@@ -9,13 +9,15 @@
         </li>
 {% endblock %}
 {% block content %}
-        <h1>{{ user.name }}</h1>
-    <p><i>Список статьей:</i></p>
+        <h1 class="mt-4">{{ user.name }}</h1>
+    <div class="mb-4">
+        <p class="mb-2"><i>Список статьей:</i></p>
             {% for article in user.articles.all %}
-                <h5>{{ article.title }}</h5>
+                <h5 class="ml-5">{{ article.title }}</h5>
             {% endfor %}
-    <p><i>Список избранных:</i></p>
+    </div>
+        <p class="mb-2"><i>Список избранных:</i></p>
             {% for favorites in user.favorites.all %}
-                <h6>{{ favorites.title }}</h6>
+                <h6 class="ml-5">{{ favorites.title }}</h6>
             {% endfor %}
 {% endblock %}
