@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from webapp.views import ArticleListView, UserListView, ArticleDetailView, UserDetailView
+from webapp.views import ArticleListView, UserListView, ArticleDetailView, UserDetailView, ArticleCreateView, CommentCreateView, ArticleUpdateView, CommentUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ArticleListView.as_view(), name='article_list'),
     path('users', UserListView.as_view(), name='user_list'),
-    path('users/<int:pk>', UserDetailView.as_view(), name='user_detail'),
-    path('articles/<int:pk>', ArticleDetailView.as_view(), name='article_detail')
+    path('user/<int:pk>', UserDetailView.as_view(), name='user_detail'),
+    path('article/<int:pk>', ArticleDetailView.as_view(), name='article_detail'),
+    path('article/create', ArticleCreateView.as_view(), name='article_create'),
+    path('comment/create', CommentCreateView.as_view(), name='comment_create'),
+    path('article/<int:pk>/update', ArticleUpdateView.as_view(), name='article_update'),
+    path('article/<int:pk>/comment', CommentUpdateView.as_view(), name='comment_update')
 ]

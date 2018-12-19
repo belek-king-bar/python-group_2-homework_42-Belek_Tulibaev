@@ -7,6 +7,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_list' %}">Список пользователей</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_create' %}">Создать статью</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_update' article.pk %}">Редактировать статью</a>
+        </li>
+
 {% endblock %}
 {% block content %}
     <div>
@@ -15,20 +23,15 @@
         <h4 class="text-right mb-3">Автор: {{ article.author.name }}</h4>
     </div>
     <div class="mb-5">
-        <h4>Комментарии:</h4>
+        <h4>Комментарии: <a href="{% url 'comment_create' %}"><i class="fas fa-plus ml-3"></i></a></h4>
             {% for comment in article.comment.all %}
-                <div class="ml-5">
-                <h5><i>{{ comment.user.name }}:</i></h5><p>{{ comment.text }}</p>
-                {% for comment in comment.comment.all %}
-                    <p class="ml-5"><i>{{ comment.user.name }}: </i>{{ comment.text }}</p>
-                {% endfor %}
-                </div>
+                {% include 'recursive_include.html' with subcomment=comment %}
             {% endfor %}
     </div>
     <div>
         <h5>Оценки:</h5>
             {% for rating in article.rating.all %}
-                <p class="ml-5"><i>{{ rating.user.name }}:</i> {{ rating.rating }}</p>
+                <p class="ml-5">{{ rating.user.name }}: <i>{{ rating.rating }}</i></p>
             {% endfor %}
     </div>
 {% endblock %}
