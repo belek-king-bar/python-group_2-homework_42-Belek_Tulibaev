@@ -7,6 +7,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_list' %}">Список пользователей</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'article_create' %}">Создать статью</a>
+        </li>
 {% endblock %}
 {% block content %}
         <h1 class="mt-4">{{ user.name }}</h1>
