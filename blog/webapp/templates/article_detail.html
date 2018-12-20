@@ -23,7 +23,7 @@
         <h4 class="text-right mb-3">Автор: {{ article.author.name }}</h4>
     </div>
     <div class="mb-5">
-        <h4>Комментарии: <a href="{% url 'comment_create' %}"><i class="fas fa-plus ml-3"></i></a></h4>
+        <h4>Комментарии: <a href="{% url 'comment_create' article.pk %}"><i class="fas fa-plus ml-3"></i></a></h4>
             {% for comment in article.comment.all %}
                 {% include 'recursive_include.html' with subcomment=comment %}
             {% endfor %}
